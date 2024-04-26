@@ -8,17 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
+    var number: Int = 0
+
+       var body: some View {
+//           NavigationStack {
+//               List(0..<1000) { i in
+//                   NavigationLink("Tap Me") {
+//                       Text("\(i)")
+//                   }
+//               }
+//           }
+           NavigationStack {
+               List(0..<100) { i in
+                   NavigationLink("Select \(i)", value: i)
+               }
+               .navigationDestination(for: Int.self) { selection in
+                   Text("You selected \(selection)")
+               }
+           }
+       }
+
+       init(number: Int) {
+           self.number = number
+           print("Creating detail view \(number)")
+       }
 }
 
 #Preview {
-    ContentView()
+    ContentView(number: 324)
 }
